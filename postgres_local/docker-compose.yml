@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_local
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database_local
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
