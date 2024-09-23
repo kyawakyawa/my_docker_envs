@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  archlinux:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: archlinux_cpp_for_cv
+    container_name: archlinux_cpp_for_cv
+    volumes:
+      - /mnt/:/mnt/
+    working_dir: /
+    tty: true
