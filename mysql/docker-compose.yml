@@ -1,0 +1,20 @@
+version: "3"
+
+# ref https://zenn.dev/kurayasu/articles/1ef33532ebad99
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "127.0.0.1:3306:3306" # ローカルからのアクセスのみ
+      # - "3306:3306" # 外部からのアクセスを認める
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./initdb.d/:/docker-entrypoint-initdb.d
+      - ./conf.d:/etc/mysql/conf.d
