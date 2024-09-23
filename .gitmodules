@@ -1,0 +1,3 @@
+[submodule "arelle/Arelle"]
+	path = arelle/Arelle
+	url = https://github.com/Arelle/Arelle.git
