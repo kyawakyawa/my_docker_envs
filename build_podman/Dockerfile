@@ -1,10 +1,12 @@
-FROM ubuntu:24.04
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
 
 ENV GOPATH=/go
 
 RUN apt-get update && apt-get -y install \
   btrfs-progs \
   crun \
+  curl \
   git \
   golang-go \
   go-md2man \
@@ -22,14 +24,11 @@ RUN apt-get update && apt-get -y install \
   libselinux1-dev \
   libsystemd-dev \
   make \
-  netavark \
   pkg-config \
   uidmap && \
-  git clone https://go.googlesource.com/go $GOPATH && \
+  curl -L https://go.dev/dl/go1.23.2.linux-amd64.tar.gz -o /go.tar.gz && \
+  tar -C $(dirname $GOPATH) -xzf /go.tar.gz && \
   cd $GOPATH && \
-  git checkout go1.22.8 && \
-  cd src && \
-  ./all.bash && \
   export PATH=$GOPATH/bin:$PATH && \
   cd / && \
   git clone https://github.com/containers/conmon && \
@@ -65,7 +64,6 @@ RUN apt-get update && apt-get -y install \
   libselinux1-dev \
   libsystemd-dev \
   make \
-  netavark \
   pkg-config \
   uidmap && \
   apt-get clean
